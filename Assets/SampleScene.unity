@@ -737,7 +737,6 @@ MonoBehaviour:
   myRidgidBody: {fileID: 832185565}
   jumpforce: 10
   logic: {fileID: 867217610}
-  birdIsAlive: 1
 --- !u!58 &832185567
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -829,6 +828,7 @@ MonoBehaviour:
   bestScore: 0
   bestScoreText: {fileID: 0}
   logic: {fileID: 0}
+  player: {fileID: 832185562}
 --- !u!82 &867217611
 AudioSource:
   m_ObjectHideFlags: 0

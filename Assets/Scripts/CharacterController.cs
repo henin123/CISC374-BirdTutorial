@@ -7,7 +7,7 @@ public class CharacterController : MonoBehaviour
     public Rigidbody2D myRidgidBody;
     public float jumpforce = 10;
     public GameStateManager logic;
-    public bool birdIsAlive = true;
+    private bool birdIsAlive = true;
     AudioManager audioManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -43,6 +43,9 @@ public class CharacterController : MonoBehaviour
     }
     private void Awake (){
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+    public bool getBirdAlive(){
+        return birdIsAlive;
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {

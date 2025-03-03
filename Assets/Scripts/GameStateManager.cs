@@ -14,29 +14,38 @@ public class GameStateManager : MonoBehaviour
     public int bestScore;
     public TextMeshProUGUI bestScoreText;
     public GameObject logic; //calls reference to character container
+    public GameObject player;
+
+    void Start()
+    {
+        bestScore = PlayerPrefs.GetInt("HighScore", 0);
+        UpdateBestScore();
+    }
 
     [ContextMenu("Add Point")]
     public void AddPoint(int scoreToAdd){
-        playerScore = playerScore + scoreToAdd;
-        audioManager.PlaySFX(audioManager.point);
-        Debug.Log("Points; " + playerScore);
-        scoreText.text = playerScore.ToString();
+        if (player.GetComponent<CharacterController>().getBirdAlive()) {
+            playerScore = playerScore + scoreToAdd;
+            audioManager.PlaySFX(audioManager.point);
+            Debug.Log("Points; " + playerScore);
+            scoreText.text = playerScore.ToString();
+        }
     }
 
     public void restartGame(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
     }
 
     public void gameOver(){
+        gameOverScreen.SetActive(true);
         if (playerScore > bestScore)
         {
             bestScore = playerScore;
             PlayerPrefs.SetInt("HighScore", bestScore);
             PlayerPrefs.Save();
+            UpdateBestScore();
         }
-        //UpdateBestScore;
-        gameOverScreen.SetActive(true);
     }
     
     public void UpdateBestScore()
@@ -44,6 +53,7 @@ public class GameStateManager : MonoBehaviour
         if (bestScoreText != null)
         {
             bestScoreText.text = bestScore.ToString();
+            //bestScoreText.text = "High Score: " + bestScore;
         }
     }
 
